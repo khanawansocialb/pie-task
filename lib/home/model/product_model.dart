@@ -6,6 +6,7 @@ class ProductModel {
   final String category;
   final List <String> images;
   final String imageUrl;
+  final num rating;
 
   const ProductModel(
       {required this.id,
@@ -14,7 +15,8 @@ class ProductModel {
       required this.description,
       required this.category,
       required this.images,
-      required this.imageUrl
+      required this.imageUrl,
+      required this.rating
       });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +27,8 @@ class ProductModel {
         description: json["description"],
         category: json["category"],
         images: List <String>.from (json["images"]),
-        imageUrl: json["thumbnail"]
+        imageUrl: json["thumbnail"],
+        rating: json["rating"],
         );
   }
 }

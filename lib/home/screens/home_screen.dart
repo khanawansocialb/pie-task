@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pie_task/config/app_size.dart';
 import 'package:pie_task/home/cubit/products_cubit.dart';
+import 'package:pie_task/home/screens/product_details_screen.dart';
 import 'package:pie_task/home/widgets/product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -57,7 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: state.products.length + 1,
                 itemBuilder: (context, index) {
                   if (index < state.products.length) {
-                    return ProductWidget(productModel: state.products[index]);
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, ProductDetailsScreen.route, arguments: state.products[index]);
+                      },
+                      child: ProductWidget(productModel: state.products[index]));
                   } else {
                     return const Padding(
                       padding:  EdgeInsets.only(left: 160),
