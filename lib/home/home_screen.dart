@@ -5,6 +5,7 @@ import 'package:pie_task/home/cubit/products_cubit.dart';
 import 'package:pie_task/home/widgets/product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const route = "/";
   const HomeScreen({super.key});
 
   @override

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pie_task/config/app_size.dart';
+import 'package:pie_task/config/routes.dart';
 import 'package:pie_task/home/cubit/products_cubit.dart';
-import 'package:pie_task/home/home_screen.dart';
 import 'package:pie_task/home/service/product_service.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => ProductsCubit(productService: ProductService()),
       child: const MaterialApp(
-        home: HomeScreen(),
+        onGenerateRoute: Routes.generateRoutes,
       ),
     );
   }
