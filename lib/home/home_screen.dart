@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pie_task/config/app_size.dart';
 import 'package:pie_task/home/cubit/products_cubit.dart';
+import 'package:pie_task/home/widgets/product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,21 +38,25 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Infinite Scroll List'),
+        title: const Text('Product Catalog Home Screen'),
       ),
       body: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           if (state is ProductsSuccess) {
             return SizedBox(
               height: AppSize.appHeight / 2,
-              child: ListView.builder(
+              child: GridView.builder(
+                padding: EdgeInsets.zero,
+                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5, 
+                  mainAxisSpacing: 5.0,  
+                ),
                 controller: _scrollController,
                 itemCount: state.products.length + 1,
                 itemBuilder: (context, index) {
                   if (index < state.products.length) {
-                    return ListTile(
-                      title: Text(state.products[index].title),
-                    );
+                    return ProductWidget(productModel: state.products[index]);
                   } else {
                     return const Center(
                       child: CircularProgressIndicator(),
