@@ -58,7 +58,7 @@ class CartWidget extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis)),
                     ),
-                    Text((productModel.price * productModel.count).toString(),
+                    Text((productModel.price * productModel.count).toStringAsFixed(2),
                         style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
