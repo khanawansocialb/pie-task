@@ -5,6 +5,7 @@ class ProductModel {
   final String description;
   final String category;
   final List <String> images;
+  final String imageUrl;
 
   const ProductModel(
       {required this.id,
@@ -12,7 +13,9 @@ class ProductModel {
       required this.price,
       required this.description,
       required this.category,
-      required this.images});
+      required this.images,
+      required this.imageUrl
+      });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
@@ -21,6 +24,8 @@ class ProductModel {
         price: json["price"],
         description: json["description"],
         category: json["category"],
-        images: List <String>.from (json["images"]));
+        images: List <String>.from (json["images"]),
+        imageUrl: json["thumbnail"]
+        );
   }
 }

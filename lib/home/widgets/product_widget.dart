@@ -13,7 +13,7 @@ class ProductWidget extends StatelessWidget {
         Image.network(
           height: 130,
           width: 100,
-          productModel.images[0], 
+          productModel.imageUrl, 
           fit: BoxFit.fill,
           ),
           SizedBox(
