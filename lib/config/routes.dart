@@ -11,7 +11,9 @@ class Routes {
             builder: (_) => const HomeScreen(), settings: settings);
       case ProductDetailsScreen.route:
         return MaterialPageRoute(
-            builder: (_) => ProductDetailsScreen(productModel: settings.arguments as ProductModel), settings: settings);
+            builder: (_) => ProductDetailsScreen(
+                productModel: settings.arguments as ProductModel),
+            settings: settings);
     }
     return null;
   }
