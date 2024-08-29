@@ -42,7 +42,7 @@ class _ProductWidgetState extends State<ProductWidget> {
           fit: BoxFit.fill,
         ),
         SizedBox(
-            width: 50,
+            width: 100,
             child: Text(widget.productModel.title,
                 style: const TextStyle(overflow: TextOverflow.ellipsis))),
         const SizedBox(height: 20),

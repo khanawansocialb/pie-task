@@ -58,8 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (index < state.products.length) {
                     return ProductWidget(productModel: state.products[index]);
                   } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return const Padding(
+                      padding:  EdgeInsets.only(left: 160),
+                      child:  Center(
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   }
                 },
