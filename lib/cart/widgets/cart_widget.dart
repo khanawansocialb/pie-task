@@ -23,8 +23,8 @@ class CartWidget extends StatelessWidget {
               color: Colors.white,
               border: Border(
                 bottom: BorderSide(
-                  color: Colors.grey, // Set the color of the bottom border
-                  width: 0.5, // Set the thickness of the bottom border
+                  color: Colors.grey,
+                  width: 0.5, 
                 ),
               ),
             ),
@@ -52,9 +52,12 @@ class CartWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    Text(productModel.title,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w400)),
+                    SizedBox(
+                      width: AppSize.appWidth / 2.3,
+                      child: Text(productModel.title,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis)),
+                    ),
                     Text((productModel.price * productModel.count).toString(),
                         style: const TextStyle(
                             fontSize: 13,

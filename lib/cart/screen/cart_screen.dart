@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pie_task/cart/cubit/cart_cubit.dart';
 import 'package:pie_task/cart/widgets/cart_widget.dart';
+import 'package:pie_task/cart/widgets/order_summary.dart';
 import 'package:pie_task/home/model/product_model.dart';
 
 class CartScreen extends StatelessWidget {
@@ -23,6 +24,7 @@ class CartScreen extends StatelessWidget {
               itemBuilder: (_, idx) => CartWidget(productModel: state[idx]));
         },
       ),
+      bottomNavigationBar: const OrderSummary(),
     );
   }
 }
