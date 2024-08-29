@@ -5,15 +5,19 @@ import '../../home/model/product_model.dart';
 class CartCubit extends HydratedCubit<List<ProductModel>> {
   CartCubit() : super([]);
 
+
   void addProduct(ProductModel product) {
     final currentCart = List<ProductModel>.from(state);
 
-    final existingProduct = currentCart.firstWhere(
-      (p) => p.id == product.id,
-    );
+    final index = currentCart.indexWhere((p) => p.id == product.id);
 
-    final updatedProduct = existingProduct.copyWith(count: existingProduct.count + 1);
-    currentCart[currentCart.indexOf(existingProduct)] = updatedProduct;
+    if (index != -1) {
+      final existingProduct = currentCart[index];
+      final updatedProduct = existingProduct.copyWith(count: existingProduct.count + 1);
+      currentCart[index] = updatedProduct;
+    } else {
+      currentCart.add(product);
+    }
 
     emit(currentCart);
   }
@@ -21,30 +25,31 @@ class CartCubit extends HydratedCubit<List<ProductModel>> {
   void incrementProduct(int productId) {
     final currentCart = List<ProductModel>.from(state);
 
-    final existingProduct = currentCart.firstWhere(
-      (p) => p.id == productId,
-    );
+    final index = currentCart.indexWhere((p) => p.id == productId);
 
-    final updatedProduct = existingProduct.copyWith(count: existingProduct.count + 1);
-    currentCart[currentCart.indexOf(existingProduct)] = updatedProduct;
-    emit(currentCart);
+    if (index != -1) {
+      final existingProduct = currentCart[index];
+      final updatedProduct = existingProduct.copyWith(count: existingProduct.count + 1);
+      currentCart[index] = updatedProduct;
+      emit(currentCart);
+    }
   }
 
   void decrementProduct(int productId) {
     final currentCart = List<ProductModel>.from(state);
 
-    final existingProduct = currentCart.firstWhere(
-      (p) => p.id == productId,
-    );
+    final index = currentCart.indexWhere((p) => p.id == productId);
 
-    if (existingProduct.count > 1) {
-      final updatedProduct = existingProduct.copyWith(count: existingProduct.count - 1);
-      currentCart[currentCart.indexOf(existingProduct)] = updatedProduct;
-    } else {
-      currentCart.remove(existingProduct);
+    if (index != -1) {
+      final existingProduct = currentCart[index];
+      if (existingProduct.count > 1) {
+        final updatedProduct = existingProduct.copyWith(count: existingProduct.count - 1);
+        currentCart[index] = updatedProduct;
+      } else {
+        currentCart.removeAt(index);
+      }
+      emit(currentCart);
     }
-
-    emit(currentCart);
   }
 
   void removeProduct(int productId) {

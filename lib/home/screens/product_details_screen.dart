@@ -35,7 +35,7 @@ class ProductDetailsScreen extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: const AddToCartBtn (),
+      bottomNavigationBar:  AddToCartBtn (productModel: productModel),
     );
   }
 }

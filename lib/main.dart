@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pie_task/cart/cubit/cart_cubit.dart';
 import 'package:pie_task/config/app_size.dart';
 import 'package:pie_task/config/routes.dart';
 import 'package:pie_task/home/cubit/products_cubit.dart';
@@ -22,10 +23,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppSize.appHeight = MediaQuery.of(context).size.height;
     AppSize.appWidth = MediaQuery.of(context).size.width;
-    return BlocProvider(
-      create: (context) => ProductsCubit(productService: ProductService()),
-      child: const MaterialApp(
-        onGenerateRoute: Routes.generateRoutes,
-    ));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) =>
+                  ProductsCubit(productService: ProductService())),
+          BlocProvider(create: (context) => CartCubit()),
+        ],
+        child: const MaterialApp(
+          onGenerateRoute: Routes.generateRoutes,
+        ));
   }
 }
