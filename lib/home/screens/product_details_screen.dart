@@ -11,29 +11,33 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     return Scaffold(
       appBar: AppBar(
         title: Text(productModel.title),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(productModel.imageUrl, 
-          height: AppSize.appHeight / 4,
-          width: double.infinity,
-          ),
-          const SizedBox(height: 30),
-          TextRow(leading: "Category", traling: productModel.category),
-          const SizedBox(height: 30),
-          TextRow(leading: "Price", traling: productModel.price.toString()),
-          const SizedBox(height: 30),
-          TextRow(leading: "Rating", traling: productModel.rating.toString()),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(productModel.description),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(productModel.imageUrl, 
+            height: !isLandscape ? AppSize.appHeight / 4 : AppSize.appHeight / 3,
+            width: double.infinity,
+            ),
+            const SizedBox(height: 30),
+            TextRow(leading: "Category", traling: productModel.category),
+            const SizedBox(height: 30),
+            TextRow(leading: "Price", traling: productModel.price.toString()),
+            const SizedBox(height: 30),
+            TextRow(leading: "Rating", traling: productModel.rating.toString()),
+            const SizedBox(height: 30),
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: !isLandscape ? 20: 150),
+              child: Text(productModel.description),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar:  AddToCartBtn (productModel: productModel),
     );

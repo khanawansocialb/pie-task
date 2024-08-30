@@ -38,45 +38,51 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
+    final crossAxisCount = isLandscape ? 4 : 2; 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Catalog Home Screen'),
+        title: const Text('Home Screen'),
       ),
-      body: BlocBuilder<ProductsCubit, ProductsState>(
-        builder: (context, state) {
-          if (state is ProductsSuccess) {
-            return SizedBox(
-              height: AppSize.appHeight / 2,
-              child: GridView.builder(
-                padding: EdgeInsets.zero,
-                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 5, 
-                  mainAxisSpacing: 5.0,  
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: BlocBuilder<ProductsCubit, ProductsState>(
+          builder: (context, state) {
+            if (state is ProductsSuccess) {
+              return SizedBox(
+                height: AppSize.appHeight,
+                child: GridView.builder(
+                  padding: EdgeInsets.zero,
+                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    crossAxisSpacing: 5, 
+                    mainAxisSpacing: 5.0,  
+                  ),
+                  controller: _scrollController,
+                  itemCount: state.products.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index < state.products.length) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, ProductDetailsScreen.route, arguments: state.products[index]);
+                        },
+                        child: ProductWidget(productModel: state.products[index]));
+                    } else {
+                      return  Padding(
+                        padding:  EdgeInsets.only(left: AppSize.appWidth / 2.5),
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                  },
                 ),
-                controller: _scrollController,
-                itemCount: state.products.length + 1,
-                itemBuilder: (context, index) {
-                  if (index < state.products.length) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, ProductDetailsScreen.route, arguments: state.products[index]);
-                      },
-                      child: ProductWidget(productModel: state.products[index]));
-                  } else {
-                    return const Padding(
-                      padding:  EdgeInsets.only(left: 160),
-                      child:  Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  }
-                },
-              ),
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
     );
   }

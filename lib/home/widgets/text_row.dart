@@ -7,8 +7,10 @@ class TextRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding:  EdgeInsets.symmetric(horizontal: !isLandscape ? 20 : 150),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

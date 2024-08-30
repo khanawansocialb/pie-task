@@ -56,6 +56,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
   Widget build(BuildContext context) {
     AppSize.appHeight = MediaQuery.of(context).size.height;
     AppSize.appWidth = MediaQuery.of(context).size.width;
+    AppSize.isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return MultiBlocProvider(
         providers: [
           BlocProvider(
