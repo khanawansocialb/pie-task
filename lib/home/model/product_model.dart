@@ -7,7 +7,7 @@ class ProductModel {
   final List<String> images;
   final String imageUrl;
   final num rating;
-  final int count; // Add count property to track quantity in the cart
+  final int count; 
 
   const ProductModel({
     required this.id,
@@ -18,7 +18,7 @@ class ProductModel {
     required this.images,
     required this.imageUrl,
     required this.rating,
-    this.count = 1, // Default count is 1
+    this.count = 1, 
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
