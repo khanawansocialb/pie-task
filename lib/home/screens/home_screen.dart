@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (state is ProductsSuccess) {
               return SizedBox(
                 height: AppSize.appHeight,
+                width: double.infinity,
                 child: GridView.builder(
                   padding: EdgeInsets.zero,
                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -70,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: ProductWidget(productModel: state.products[index]));
                     } else {
                       return  Padding(
-                        padding:  EdgeInsets.only(left: AppSize.appWidth / 2.5),
+                        padding:  EdgeInsets.only(left: AppSize.appWidth / 2.4),
                         child: const Center(
                           child: CircularProgressIndicator(),
                         ),

@@ -8,6 +8,7 @@ part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   final ProductService productService;
+
   ProductsCubit({required this.productService}) : super(ProductsInitial());
 
   getProducts() async {
@@ -15,7 +16,8 @@ class ProductsCubit extends Cubit<ProductsState> {
       List<ProductModel> newProducts = await productService.getProducts();
       if (state is ProductsSuccess) {
         final currentProducts = (state as ProductsSuccess).products;
-        emit(ProductsSuccess(products: List.from(currentProducts)..addAll(newProducts)));
+        emit(ProductsSuccess(
+            products: List.from(currentProducts)..addAll(newProducts)));
       } else {
         emit(ProductsSuccess(products: newProducts));
       }
