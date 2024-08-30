@@ -11,14 +11,16 @@ class CartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     return  Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: !isLandscape ? const EdgeInsets.all(15.0) : const EdgeInsets.only(right: 140, bottom: 15),
       child: Stack(
         alignment: Alignment.topRight,
         children: [
           Container(
-            width: double.infinity,
-            height: AppSize.appHeight / 6,
+            width: !isLandscape ? double.infinity : AppSize.appWidth / 1.5,
+            height: !isLandscape ? AppSize.appHeight / 6 : AppSize.appHeight / 2.5,
             decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(
@@ -42,8 +44,8 @@ class CartWidget extends StatelessWidget {
                       ),
                       child: Image.network(
                         productModel.imageUrl,
-                        height: AppSize.appHeight / 5.0375,
-                        width: AppSize.appWidth /3.2727,
+                        height: !isLandscape ? AppSize.appHeight / 5.0375 : AppSize.appHeight / 2,
+                        width: !isLandscape ? AppSize.appWidth /3.2727: AppSize.appWidth / 4,
                         fit: BoxFit.fitHeight,
                       )),
                 ),
@@ -53,7 +55,7 @@ class CartWidget extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     SizedBox(
-                      width: AppSize.appWidth / 2.3,
+                      width: !isLandscape ? AppSize.appWidth / 2.3 : AppSize.appWidth / 5.3,
                       child: Text(productModel.title,
                           style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400, overflow: TextOverflow.ellipsis)),

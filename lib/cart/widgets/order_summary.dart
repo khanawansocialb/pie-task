@@ -8,6 +8,8 @@ class OrderSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     return BlocBuilder<CartCubit, List<ProductModel>>(
       builder: (context, state) {
         num total = 0;
@@ -15,7 +17,7 @@ class OrderSummary extends StatelessWidget {
           total += p.price * p.count;
         }
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: !isLandscape ? 10 : 130, vertical: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
